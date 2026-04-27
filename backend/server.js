@@ -15,7 +15,6 @@ const mongoOptions = {
 let MONGODB_URI = process.env.MONGODB_URI;
 
 async function connectDB() {
-
   mongoose.connect(MONGODB_URI, mongoOptions)
     .then(() => console.log('MongoDB connected successfully!'))
     .catch(err => console.error('MongoDB connection error:', err.message));
