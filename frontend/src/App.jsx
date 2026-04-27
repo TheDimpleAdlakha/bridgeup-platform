@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Projects from './pages/Projects';
 import CreateProject from './pages/CreateProject';
 import Dashboard from './pages/Dashboard';
+import Analytics from './pages/Analytics';
+import ChatWidget from './components/ChatWidget';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,12 +29,14 @@ function App() {
     <Router>
       <Navbar user={user} handleLogout={handleLogout} />
       <div className="container">
+        <ChatWidget user={user} />
         <Routes>
           <Route path="/" element={user ? <Home user={user} /> : <Navigate to="/auth" />} />
           <Route path="/auth" element={!user ? <Auth setUser={setUser} /> : <Navigate to="/" />} />
           <Route path="/projects" element={user ? <Projects user={user} /> : <Navigate to="/auth" />} />
-          <Route path="/create-project" element={user ? <CreateProject /> : <Navigate to="/" />} />
+          <Route path="/create-project" element={user ? <CreateProject /> : <Navigate to="/auth" />} />
           <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/auth" />} />
+          <Route path="/analytics" element={user ? <Analytics /> : <Navigate to="/auth" />} />
         </Routes>
       </div>
     </Router>
