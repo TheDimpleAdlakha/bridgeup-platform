@@ -15,16 +15,6 @@ const mongoOptions = {
 let MONGODB_URI = process.env.MONGODB_URI;
 
 async function connectDB() {
-  if (MONGODB_URI.includes('cluster0.ancbtjx.mongodb.net')) {
-    console.log('Detected problematic Atlas URI. Using mongodb-memory-server instead...');
-    try {
-      const { MongoMemoryServer } = require('mongodb-memory-server');
-      const mongoServer = await MongoMemoryServer.create();
-      MONGODB_URI = mongoServer.getUri();
-    } catch (e) {
-      console.error('Failed to create in-memory server', e);
-    }
-  }
 
   mongoose.connect(MONGODB_URI, mongoOptions)
     .then(() => console.log('MongoDB connected successfully!'))
